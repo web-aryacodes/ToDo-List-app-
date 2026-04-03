@@ -118,5 +118,20 @@ taskInput.addEventListener('keypress', e => {
     if (e.key === 'Enter') addTask();
 });
 
+/* input count */
+const charCounter = document.getElementById("charCounter");
+const MAX_LENGTH = 60;
+
+taskInput.addEventListener("input", () => {
+    let text = taskInput.value;
+
+    if (text.length > MAX_LENGTH) {
+        text = text.slice(0, MAX_LENGTH);
+        taskInput.value = text;
+    }
+
+    charCounter.textContent = `${text.length}/${MAX_LENGTH}`;
+});
+
 /* INITIAL LOAD */
 renderTasks();

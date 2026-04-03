@@ -1,10 +1,15 @@
-let todos = [];
+let todos = JSON.parse(localStorage.getItem("todos")) || [];
 let currentFilter = 'all';
 
 const taskInput = document.getElementById('taskInput');
 const addButton = document.getElementById('addButton');
 const taskList = document.getElementById('taskList');
 const filterTabs = document.querySelectorAll('.filter-tab');
+
+/* SAVE FUNCTION */
+function save() {
+    localStorage.setItem("todos", JSON.stringify(todos));
+}
 
 function addTask() {
     const text = taskInput.value.trim();
@@ -17,6 +22,7 @@ function addTask() {
     });
 
     taskInput.value = '';
+    save();
     renderTasks();
 }
 
@@ -24,11 +30,13 @@ function toggleTask(id) {
     todos = todos.map(todo =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
+    save();
     renderTasks();
 }
 
 function deleteTask(id) {
     todos = todos.filter(todo => todo.id !== id);
+    save();
     renderTasks();
 }
 
@@ -71,3 +79,6 @@ addButton.addEventListener('click', addTask);
 taskInput.addEventListener('keypress', e => {
     if (e.key === 'Enter') addTask();
 });
+
+/* INITIAL LOAD */
+renderTasks();

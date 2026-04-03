@@ -41,6 +41,10 @@ body {
     backdrop-filter: blur(24px);
     border-radius: 16px;
     padding: 32px;
+    min-height: 320px;
+    max-height: 420px;
+    display: flex;
+    flex-direction: column;
 }
 
 .input-section {
@@ -98,6 +102,9 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
+
+    overflow-y: auto;
+    flex: 1;
 }
 
 .task-item {
@@ -107,6 +114,11 @@ body {
     display: flex;
     align-items: center;
     gap: 16px;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #64748b;
 }
 
 .task-text {
@@ -126,7 +138,12 @@ body {
     color: #64748b;
 }
 
-.task-item.completed .task-text {
-    text-decoration: line-through;
-    color: #64748b;
+
+.task-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.task-list::-webkit-scrollbar-thumb {
+    background: #3b82f6;
+    border-radius: 10px;
 }

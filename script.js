@@ -10,10 +10,18 @@ function addTask() {
 
     todos.unshift({
         id: Date.now().toString(),
-        text
+        text,
+        completed: false
     });
 
     taskInput.value = '';
+    renderTasks();
+}
+
+function toggleTask(id) {
+    todos = todos.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
     renderTasks();
 }
 
@@ -24,7 +32,10 @@ function deleteTask(id) {
 
 function renderTasks() {
     taskList.innerHTML = todos.map(todo => `
-        <div class="task-item">
+        <div class="task-item ${todo.completed ? 'completed' : ''}">
+            <input type="checkbox" 
+                ${todo.completed ? 'checked' : ''} 
+                onchange="toggleTask('${todo.id}')">
             <span class="task-text">${todo.text}</span>
             <button class="delete-button" onclick="deleteTask('${todo.id}')">Delete</button>
         </div>

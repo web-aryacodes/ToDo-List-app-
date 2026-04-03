@@ -125,3 +125,8 @@ body {
     text-align: center;
     color: #64748b;
 }
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #64748b;
+}

@@ -1,8 +1,10 @@
 let todos = [];
+let currentFilter = 'all';
 
 const taskInput = document.getElementById('taskInput');
 const addButton = document.getElementById('addButton');
 const taskList = document.getElementById('taskList');
+const filterTabs = document.querySelectorAll('.filter-tab');
 
 function addTask() {
     const text = taskInput.value.trim();
@@ -30,8 +32,19 @@ function deleteTask(id) {
     renderTasks();
 }
 
+/* FILTER FUNCTION */
+function filterTasks() {
+    return todos.filter(todo => {
+        if (currentFilter === 'active') return !todo.completed;
+        if (currentFilter === 'completed') return todo.completed;
+        return true;
+    });
+}
+
 function renderTasks() {
-    taskList.innerHTML = todos.map(todo => `
+    const filtered = filterTasks();
+
+    taskList.innerHTML = filtered.map(todo => `
         <div class="task-item ${todo.completed ? 'completed' : ''}">
             <input type="checkbox" 
                 ${todo.completed ? 'checked' : ''} 
@@ -41,6 +54,17 @@ function renderTasks() {
         </div>
     `).join('');
 }
+
+/* FILTER TAB CLICK */
+filterTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        filterTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        currentFilter = tab.dataset.filter;
+        renderTasks();
+    });
+});
 
 addButton.addEventListener('click', addTask);
 

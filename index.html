@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App - Modern Dark Theme</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Todo App</h1>
+            <p>Organize your tasks efficiently</p>
+        </div>
+
+        <div class="main-card">
+            <div class="input-section">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        class="task-input" 
+                        id="taskInput" 
+                        placeholder="Enter a task..." >
+                </div>
+                <button class="add-button" id="addButton">
+                    Add
+                </button>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">
+                    All <span class="count" id="allCount">0</span>
+                </button>
+                <button class="filter-tab" data-filter="active">
+                    Active <span class="count" id="activeCount">0</span>
+                </button>
+                <button class="filter-tab" data-filter="completed">
+                    Completed <span class="count" id="completedCount">0</span>
+                </button>
+            </div>
+
+            <div class="task-list" id="taskList"></div>
+        </div>
+
+        <div class="footer-stats" id="footerStats">
+            0 tasks remaining
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
